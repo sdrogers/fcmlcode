@@ -7,7 +7,7 @@
 
 # Tasks
 
-- Download the data (`data100m.csv') from the Moodle page
+- Download the data (`data100m.csv') from [https://raw.githubusercontent.com/sdrogers/fcmlcode/master/labs/linear_regression/data100m.csv](https://raw.githubusercontent.com/sdrogers/fcmlcode/master/labs/linear_regression/data100m.csv)
 - Plot Olympic year against winning time (I recommend using `matplotlib` to plot in Python)
 - Using the expressions derived in the lecture compute $w_0$ and $w_1$
 - Create a new plot that includes the data and the function defined by $w_0$ and $w_1$
