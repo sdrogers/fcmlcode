@@ -1,8 +1,9 @@
 %% synthquad.m
 % From A First Course in Machine Learning, Chapter 1.
 % Simon Rogers, 31/10/11 [simon.rogers@glasgow.ac.uk]
-clear all;close all;
-
+% Revised by Sayyed Mohsen Vazirizade, Oct/10/2017 [smvazirizade@email.arizona.edu]
+clc;clear all;close all;
+rng(1);
 %% Generate a synthetic dataset from a quadratic function
 N = 200; %Number of data points
 % Generate random x values between -5 and 5
@@ -32,10 +33,10 @@ X = [];
 for k = 0:2
     X = [X x.^k];
     if k == 1
-        linear_w = inv(X'*X)*X'*t;
+        linear_w = (X'*X)\X'*t;
     end
     if k == 2
-        quad_w = inv(X'*X)*X'*t;
+        quad_w = (X'*X)\X'*t;
     end
 end
 
