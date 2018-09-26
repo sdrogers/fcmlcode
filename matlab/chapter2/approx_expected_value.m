@@ -1,8 +1,10 @@
 %% approx_expected_value.m
 % From A First Course in Machine Learning, Chapter 2.
 % Simon Rogers, 01/11/11 [simon.rogers@glasgow.ac.uk]
+% Revised by Sayyed Mohsen Vazirizade, Oct/10/2017 [smvazirizade@email.arizona.edu]
 % Approximating expected values via sampling
-clear all;close all;
+clc;clear all;close all;
+rng(1);
 %% We are trying to compute the expected value of
 % $y^2$
 %%
@@ -26,8 +28,8 @@ for i = 1:length(posns)
     ey2_evol(i) = mean(ys(1:posns(i)).^2);
 end
 figure(1);hold off
-plot(posns,ey2_evol);
+semilogx(posns,ey2_evol);
 hold on
-plot([posns(1) posns(end)],[1/3 1/3],'r--');
+semilogx([posns(1) posns(end)],[1/3 1/3],'r--');
 xlabel('Samples');
 ylabel('Approximation');
