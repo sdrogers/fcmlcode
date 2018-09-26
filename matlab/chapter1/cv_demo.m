@@ -1,8 +1,10 @@
 %% cv_demo.m
 % From A First Course in Machine Learning, Chapter 1.
 % Simon Rogers, 31/10/11 [simon.rogers@glasgow.ac.uk]
+% Revised by Sayyed Mohsen Vazirizade, Oct/10/2017 [smvazirizade@email.arizona.edu]
 % Demonstration of cross-validation for model selection
-clear all;close all;
+clc;clear all;close all;
+rng(1);
 %% Generate some data
 % Generate x between -5 and 5
 N = 100;
@@ -15,7 +17,7 @@ testt = 5*testx.^3 - testx.^2 + testx + 150*randn(size(testx));
 maxorder = 7;
 X = [];
 testX = [];
-K = 10 %K-fold CV
+K = 9 %K-fold CV
 sizes = repmat(floor(N/K),1,K);
 sizes(end) = sizes(end) + N - sum(sizes);
 csizes = [0 cumsum(sizes)];
@@ -33,16 +35,16 @@ for k = 0:maxorder
     for fold = 1:K
         % Partition the data
         % foldX contains the data for just one fold
-        % trainX contains all other data
-        
+        % trainX contains all other data    
+
         foldX = X(csizes(fold)+1:csizes(fold+1),:);
         trainX = X;
         trainX(csizes(fold)+1:csizes(fold+1),:) = [];
         foldt = t(csizes(fold)+1:csizes(fold+1));
         traint = t;
         traint(csizes(fold)+1:csizes(fold+1)) = [];
-        
-        w = inv(trainX'*trainX)*trainX'*traint;
+       
+        w = (trainX'*trainX)\trainX'*traint;
         fold_pred = foldX*w;
         cv_loss(fold,k+1) = mean((fold_pred-foldt).^2);
         ind_pred = testX*w;
@@ -59,13 +61,16 @@ plot(0:maxorder,mean(cv_loss,1),'linewidth',2)
 xlabel('Model Order');
 ylabel('Loss');
 title('CV Loss');
+ylim(1.2*[0,max(max(max(mean(cv_loss,1),mean(train_loss,1)),mean(ind_loss,1)))])
 subplot(132)
 plot(0:maxorder,mean(train_loss,1),'linewidth',2)
 xlabel('Model Order');
 ylabel('Loss');
 title('Train Loss');
+ylim(1.2*[0,max(max(max(mean(cv_loss,1),mean(train_loss,1)),mean(ind_loss,1)))])
 subplot(133)
 plot(0:maxorder,mean(ind_loss,1),'linewidth',2)
 xlabel('Model Order');
 ylabel('Loss');
 title('Independent Test Loss')
+ylim(1.2*[0,max(max(max(mean(cv_loss,1),mean(train_loss,1)),mean(ind_loss,1)))])
