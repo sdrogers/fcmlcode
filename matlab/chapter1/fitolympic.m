@@ -1,10 +1,12 @@
 %% fitolympic.m
 % From A First Course in Machine Learning, Chapter 1.
 % Simon Rogers, 31/10/11 [simon.rogers@glasgow.ac.uk]
-clear all;close all;
+% Revised by Sayyed Mohsen Vazirizade, Oct/10/2017 [smvazirizade@email.arizona.edu]
+clc;clear all;close all;
 
 %% Load the Olympic data
-load ../data/olympics
+%load ../data/olympics.mat
+male100=load('olympic100m.txt')
 
 %% Extract the male 100m data
 x = male100(:,1); % Olympic years

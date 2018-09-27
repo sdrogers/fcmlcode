@@ -1,8 +1,9 @@
 %% margpoly.m
 % From A First Course in Machine Learning, Chapter 3.
 % Simon Rogers, 01/11/11 [simon.rogers@glasgow.ac.uk]
+% Revised by Sayyed Mohsen Vazirizade, Oct/15/2017 [smvazirizade@email.arizona.edu]
 % Marginal likelihood for model selection
-clear all;close all;
+clc;clear all;close all;
 
 %% Generate the data
 N = 100;
@@ -48,11 +49,11 @@ for i = 1:length(orders)
     D = length(margmu);
     log_marg(i) = -(D/2)*log(2*pi) - 0.5*log(det(margcov));
     log_marg(i) = log_marg(i) - 0.5*(t-margmu)'*inv(margcov)*(t-margmu);
-    
+    pause(2)
 end
 
 %% Plot the marginal likelihoods
-figure(1); hold off
+figure(2); hold off
 bar(orders,exp(log_marg));
 xlabel('Model Order');
 ylabel('Marginal likelihood');

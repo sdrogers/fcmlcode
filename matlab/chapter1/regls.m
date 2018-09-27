@@ -1,6 +1,7 @@
 %% regls.m
 % From A First Course in Machine Learning, Chapter 1.
 % Simon Rogers, 31/10/11 [simon.rogers@glasgow.ac.uk]
+% Revised by Sayyed Mohsen Vazirizade, Oct/10/2017 [smvazirizade@email.arizona.edu]
 % An example of regularised least squares
 % Data is generated from a linear model and then a fifth order polynomial
 % is fitted.
@@ -9,6 +10,8 @@
 % 
 % $${\cal L} = \lambda \mathbf{w}^T\mathbf{w} + \sum_{n=1}^N (t_n - f(x_n;\mathbf{w}))^2  $$
 % 
+clc;clear all;close all;
+rng(1);
 
 %% Generate the data
 x = [0:0.2:1]';
@@ -38,7 +41,7 @@ for l = 1:length(lam)
     %%
     lambda = lam(l);
     N = size(x,1);
-    w = inv(X'*X + N*lambda*eye(size(X,2)))*X'*t;
+    w = (X'*X + N*lambda*eye(size(X,2)))\X'*t;
     figure(l);hold off
     plot(x,t,'b.','markersize',20);
     hold on

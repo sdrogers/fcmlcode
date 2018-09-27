@@ -2,12 +2,13 @@
 % From A First Course in Machine Learning, Chapter 2.
 % Simon Rogers, 01/11/11 [simon.rogers@glasgow.ac.uk]
 % Likelihood increases as model complexity increases - example
-clear all;close all;
+clc;clear all;close all;
 %% Load the Olympic data
-load ../data/olympics
+%load ../data/olympics.mat
+male100=load('olympic100m.txt')
 
-x = male100(:,1);
-t = male100(:,2);
+x = male100(:,1); % Olympic years
+t = male100(:,2); % Winning times
 
 % Rescale x for numerical stability
 x = x - x(1);
@@ -22,7 +23,7 @@ X = [];
 N = length(x);
 for i = 1:length(orders)
     X = [X x.^orders(i)];
-    w = inv(X'*X)*X'*t;
+    w = (X'*X)\(X'*t);
     ss = (1/N)*(t'*t - t'*X*w);
     log_like(i) = sum(log(normpdf(t,X*w,sqrt(ss))));
 end

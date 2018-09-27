@@ -1,7 +1,7 @@
 %% fitlinear.m
 % From A First Course in Machine Learning, Chapter 1.
 % Simon Rogers, 31/10/11 [simon.rogers@glasgow.ac.uk]
-clear all;close all;
+clc;clear all;close all;
 
 %% Define the data (Table 1.1)
 % Change these to use a different dataset
